@@ -3,6 +3,7 @@ class UserModel
 {
     protected $id,
         $email,
+        $pwd = null,
         $privilege;
 
 
@@ -28,6 +29,11 @@ class UserModel
         return $this->nom;
     }
 
+    public function pwd()
+    {
+        return $this->pwd;
+    }
+
     public function email()
     {
         return $this->annee;
@@ -36,6 +42,11 @@ class UserModel
     public function privilege()
     {
         return $this->score;
+    }
+
+    public function setPwd()
+    {
+        $this->pwd = $pwd;
     }
 
     public function setId($id)
