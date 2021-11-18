@@ -11,7 +11,7 @@
     <div class="wrapper">
         <div id="formContent">
             <!-- Tabs Titles -->
-        <h2 class="inactive underlineHover"><a href="index.php"> Connexion </a></h2>
+        <h2 class="inactive underlineHover"><a href="../../index.php"> Connexion </a></h2>
         <h2 class="active"> Inscription </h2>
 
         <!-- Icon -->

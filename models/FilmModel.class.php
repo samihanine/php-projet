@@ -4,7 +4,7 @@ class FilmModel
     protected $id,
         $nom,
         $annee,
-        $nb_vote,
+        $vote,
         $score;
 
 
@@ -47,7 +47,7 @@ class FilmModel
 
     public function vote()
     {
-        return $this->nb_vote;
+        return $this->vote;
     }
 
     public function id()
@@ -72,7 +72,7 @@ class FilmModel
         }
     }
 
-    public function setNb_vote()
+    public function setVote()
     {
         $this->nb_vote++;
     }

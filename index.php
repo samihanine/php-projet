@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="login.css" rel="stylesheet">
+    <link href="vue/auth/login.css" rel="stylesheet">
 </head>
 <body>
     <div class="wrapper">
     <div id="formContent">
         <!-- Tabs Titles -->
         <h2 class="active"> Connexion </h2>
-        <h2 class="inactive underlineHover"><a href="inscription.php"> Inscription </a></h2>
+        <h2 class="inactive underlineHover"><a href="vue/auth/inscription.php"> Inscription </a></h2>
 
         <!-- Icon -->
 
