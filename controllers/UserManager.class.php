@@ -21,14 +21,14 @@ class UserManager
 
   public function delete(UserModel $user)
   {
-    $this->_db->exec('DELETE FROM film WHERE id = '.$user->id());
+    $this->_db->exec('DELETE FROM user WHERE id = '.$user->id());
   }
 
   public function get($id)
   {
     $id = (int) $id;
 
-    $q = $this->_db->query('SELECT * FROM film WHERE id = '.$id);
+    $q = $this->_db->query('SELECT * FROM user WHERE id = '.$id);
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
     return new UserModel($donnees);
@@ -36,16 +36,16 @@ class UserManager
 
   public function getList()
   {
-    $films = [];
+    $users = [];
 
-    $q = $this->_db->query('SELECT * FROM film ORDER BY nom');
+    $q = $this->_db->query('SELECT * FROM user ORDER BY nom');
 
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
-      $films[] = new UserModel($donnees);
+      $users[] = new UserModel($donnees);
     }
 
-    return $films;
+    return $users;
   }
 
   public function update(UserModel $user)
