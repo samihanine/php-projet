@@ -1,5 +1,5 @@
 <?php
-class PersonnagesManager
+class FilmManager
 {
   private $_db; // Instance de PDO
 
@@ -8,9 +8,9 @@ class PersonnagesManager
     $this->_db = $db;
   }
 
-  public function add(Film $film)
+  public function add(FilmModel $film)
   {
-    $q = $this->_db->prepare('INSERT INTO personnages(nom, annee, score, vote) VALUES(:nom, :annee, :score, :vote)');
+    $q = $this->_db->prepare('INSERT INTO film(nom, annee, score, vote) VALUES(:nom, :annee, :score, :vote)');
 
     $q->bindValue(':nom', $film->nom());
     $q->bindValue(':annee', $film->annee());
@@ -20,7 +20,7 @@ class PersonnagesManager
     $q->execute();
   }
 
-  public function delete(Film $film)
+  public function delete(FilmModel $film)
   {
     $this->_db->exec('DELETE FROM film WHERE id = '.$film->id());
   }
@@ -32,7 +32,7 @@ class PersonnagesManager
     $q = $this->_db->query('SELECT * FROM film WHERE id = '.$id);
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
-    return new Film($donnees);
+    return new FilmModel($donnees);
   }
 
   public function getList()
@@ -43,13 +43,13 @@ class PersonnagesManager
 
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
-      $films[] = new Film($donnees);
+      $films[] = new FilmModel($donnees);
     }
 
     return $films;
   }
 
-  public function update(Film $film)
+  public function update(FilmModel $film)
   {
     $q = $this->_db->prepare('UPDATE film SET nom = :nom, annee = :annee, score = :score, vote = :vote WHERE id = :id');
 

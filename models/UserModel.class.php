@@ -44,7 +44,7 @@ class UserModel
         return $this->score;
     }
 
-    public function setPwd()
+    public function setPwd($pwd)
     {
         $this->pwd = $pwd;
     }
