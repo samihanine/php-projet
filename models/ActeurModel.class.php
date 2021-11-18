@@ -1,10 +1,9 @@
 <?php
-class UserModel
+class ActeurModel
 {
     protected $id,
-        $email,
-        $pwd = null,
-        $privilege;
+        $nom,
+        $prenom;
 
 
     public function __construct(array $donnees)
@@ -29,24 +28,19 @@ class UserModel
         return $this->id;
     }
 
-    public function pwd()
+    public function nom()
     {
-        return $this->pwd;
+        return $this->nom;
     }
 
-    public function email()
+    public function prenom()
     {
-        return $this->annee;
+        return $this->prenom;
     }
 
-    public function privilege()
+    public function setNom($nom)
     {
-        return $this->score;
-    }
-
-    public function setPwd($pwd)
-    {
-        $this->pwd = $pwd;
+        $this->nom = $nom;
     }
 
     public function setId($id)
@@ -58,14 +52,8 @@ class UserModel
         }
     }
 
-    public function setEmail($email)
+    public function setPrenom($prenom)
     {
-        $this->email = $email;
+        $this->prenom = $prenom;
     }
-
-    public function setPrivilege($privilege)
-    {
-        $this->privilege = $privilege;
-    }
-}
 ?>

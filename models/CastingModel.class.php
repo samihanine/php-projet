@@ -1,10 +1,9 @@
 <?php
-class UserModel
+class CastingModel
 {
     protected $id,
-        $email,
-        $pwd = null,
-        $privilege;
+        $idFilm,
+        $idActeur;
 
 
     public function __construct(array $donnees)
@@ -29,43 +28,40 @@ class UserModel
         return $this->id;
     }
 
-    public function pwd()
+    public function idFilm()
     {
-        return $this->pwd;
+        return $this->idFilm;
     }
 
-    public function email()
+    public function idActeur()
     {
-        return $this->annee;
-    }
-
-    public function privilege()
-    {
-        return $this->score;
-    }
-
-    public function setPwd($pwd)
-    {
-        $this->pwd = $pwd;
+        return $this->idActeur;
     }
 
     public function setId($id)
     {
         $id = (int) $id;
 
-        if ($id > 0) {
+        if($idFilm > 0){
             $this->id = $id;
         }
     }
 
-    public function setEmail($email)
+    public function setIdfilm($idFilm)
     {
-        $this->email = $email;
+        $idFilm = (int) $idFilm;
+
+        if ($idFilm > 0) {
+            $this->idFilm = $idFilm;
+        }
     }
 
-    public function setPrivilege($privilege)
+    public function setIdacteur($idActeur)
     {
-        $this->privilege = $privilege;
+        $idActeur = (int) $idActeur;
+
+        if ($idActeur > 0) {
+            $this->idActeur = $idActeur;
+        }
     }
-}
 ?>
