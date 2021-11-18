@@ -1,28 +1,66 @@
 <?php
-    require_once("bdd.php");
+class PersonnagesManager
+{
+  private $_db; // Instance de PDO
 
-    abstract class Film {
-        function __construct($email, $pwd) {
-            global $bdd;
+  public function __construct($db)
+  {
+    $this->_db = $db;
+  }
 
-            $query = $bdd -> prepare('select * from user where email=? and pwd=?');
-            $query -> execute(array($email, $pwd));
+  public function add(Film $film)
+  {
+    $q = $this->_db->prepare('INSERT INTO personnages(nom, annee, score, vote) VALUES(:nom, :annee, :score, :vote)');
 
-            if (isset($querry)) {
-                $this->id = $query['id'];
-                $this->login = $query['login'];
-                $this->pwd = $query['pwd'];
-                $this->email = $query['email'];
-                $this->privilege = $query['privilege'];
+    $q->bindValue(':nom', $film->nom());
+    $q->bindValue(':annee', $film->annee());
+    $q->bindValue(':score', $film->score());
+    $q->bindValue(':vote', $film->vote());
 
-                session_start();
-                $_SESSION['user'] = $this;
-                header("Location: pages/home.php");
-            }
-        }
+    $q->execute();
+  }
 
+  public function delete(Film $film)
+  {
+    $this->_db->exec('DELETE FROM film WHERE id = '.$film->id());
+  }
 
+  public function get($id)
+  {
+    $id = (int) $id;
 
+    $q = $this->_db->query('SELECT * FROM film WHERE id = '.$id);
+    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+
+    return new Film($donnees);
+  }
+
+  public function getList()
+  {
+    $films = [];
+
+    $q = $this->_db->query('SELECT * FROM film ORDER BY nom');
+
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    {
+      $films[] = new Film($donnees);
     }
 
+    return $films;
+  }
+
+  public function update(Film $film)
+  {
+    $q = $this->_db->prepare('UPDATE film SET nom = :nom, annee = :annee, score = :score, vote = :vote WHERE id = :id');
+
+    $q->bindValue(':nom', $film->nom());
+    $q->bindValue(':annee', $film->annee());
+    $q->bindValue(':score', $film->score());
+    $q->bindValue(':vote', $film->vote());
+    $q->bindValue(':id', $film->id());
+
+    $q->execute();
+  }
+
+}
 ?>
