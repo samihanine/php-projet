@@ -9,23 +9,21 @@
 </head>
 <body>
     <div class="wrapper">
-    <div id="formContent">
-        <!-- Tabs Titles -->
-        <h2 class="active"> Connexion </h2>
-        <h2 class="inactive underlineHover"><a href="inscription.php"> Inscription </a></h2>
+        <div id="formContent">
+            <!-- Tabs Titles -->
+        <h2 class="inactive underlineHover"><a href="index.php"> Connexion </a></h2>
+        <h2 class="active"> Inscription </h2>
 
         <!-- Icon -->
 
         <!-- Login Form -->
         <form>
         <input type="text" id="login" class="" name="email" placeholder="Email">
-        <input type="text" id="password" class="" name="password" placeholder="Mot de passe">
-        <input type="submit" class="fadeIn" value="Connexion">
+        <input type="text" id="password" class="" name="passwpord" placeholder="Mot de passe">
+        <input type="submit" class="fadeIn" value="Inscription">
         </form>
 
-        <!-- Remind Passowrd -->
-
-    </div>
+        </div>
     </div>
 </body>
 </html>

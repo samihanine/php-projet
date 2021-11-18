@@ -1,5 +1,5 @@
 <?php
-class Film
+class FilmModel
 {
     protected $id,
         $nom,
