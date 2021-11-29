@@ -40,7 +40,7 @@ class FilmManager
     $films = [];
 
     $q = $this->_db->query('SELECT * FROM film ORDER BY nom');
-
+    
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
       $films[] = new FilmModel($donnees);

@@ -1,4 +1,6 @@
 <?php
+
+
 class ActeurManager
 {
   private $_db; // Instance de PDO
@@ -53,7 +55,7 @@ class ActeurManager
 
     $q->bindValue(':nom', $acteur->nom());
     $q->bindValue(':prenom', $acteur->prenom());
-    $q->bindValue(':id', $acteur>id());
+    $q->bindValue(':id', $acteur->id());
 
     $q->execute();
   }

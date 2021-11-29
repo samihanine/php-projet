@@ -42,7 +42,7 @@ class CastingModel
     {
         $id = (int) $id;
 
-        if($idFilm > 0){
+        if($id > 0){
             $this->id = $id;
         }
     }
@@ -64,4 +64,5 @@ class CastingModel
             $this->idActeur = $idActeur;
         }
     }
+}
 ?>

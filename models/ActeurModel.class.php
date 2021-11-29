@@ -1,7 +1,7 @@
 <?php
 class ActeurModel
 {
-    protected $id,
+    public $id,
         $nom,
         $prenom;
 
@@ -56,4 +56,5 @@ class ActeurModel
     {
         $this->prenom = $prenom;
     }
+}  
 ?>

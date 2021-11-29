@@ -53,7 +53,7 @@ class CastingManager
 
     $q->bindValue(':idFilm', $casting->idFilm());
     $q->bindValue(':idActeur', $casting->idActeur());
-    $q->bindValue(':id', $casting>id());
+    $q->bindValue(':id', $casting->id());
 
     $q->execute();
   }

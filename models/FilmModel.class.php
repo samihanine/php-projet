@@ -1,7 +1,7 @@
 <?php
 class FilmModel
 {
-    protected $id,
+    public $id,
         $nom,
         $annee,
         $vote,
@@ -67,14 +67,21 @@ class FilmModel
 
     public function setNom($nom)
     {
-        if (is_string($nom) && $this->nomValide()) {
+        if (is_string($nom)) {
             $this->nom = $nom;
+        }
+    }
+
+    public function setAnnee($annee)
+    {
+        if (is_string($annee)) {
+            $this->annee = $annee;
         }
     }
 
     public function setVote()
     {
-        $this->nb_vote++;
+        $this->vote++;
     }
 
     public function setScore($score)

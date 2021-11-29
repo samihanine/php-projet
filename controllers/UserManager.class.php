@@ -60,5 +60,16 @@ class UserManager
     $q->execute();
   }
 
+  public function auth($email, $pwd)
+  {
+
+    $q = $this->_db->prepare('SELECT * FROM user WHERE email = :email and pwd = :pwd');
+    $q->bindValue(':email', $email);
+    $q->bindValue(':pwd', $pwd);
+
+    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+
+    return new UserModel($donnees);
+  }
 }
 ?>
