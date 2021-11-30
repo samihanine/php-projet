@@ -36,12 +36,12 @@ class UserModel
 
     public function email()
     {
-        return $this->annee;
+        return $this->email;
     }
 
     public function privilege()
     {
-        return $this->score;
+        return $this->privilege;
     }
 
     public function setPwd($pwd)

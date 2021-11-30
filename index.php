@@ -14,6 +14,8 @@ include "vue/ViewUser.php";
 include "controllers/UserManager.class.php";
 include "models/UserModel.class.php";
 
+session_start();
+
 $path = $_SERVER['REQUEST_URI'];
 $path = explode('/', $path);
 $path = $path[sizeof($path)-1];
@@ -39,6 +41,10 @@ switch ($path) {
     case 'auth-result':
         $title = "S'identifier";
         $content = $view_user->display_auth_result();
+        break;
+    case 'disconnect':
+        $title = "Déconnexion réussie";
+        $content = $view_user->disconnect();
         break;
     // view Acteurs
     case 'add-acteur':

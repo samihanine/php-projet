@@ -17,7 +17,6 @@ class ViewUser {
 
             <button type="submit">Se connecter</button>
         </form>';
-
         return $result;
     }
 
@@ -29,6 +28,7 @@ class ViewUser {
 
             if ($user != null) {
                 $result = '<p>Connexion réussi !</p>';
+                $_SESSION["loggedUser"] = serialize($user);
             }
         }
 
@@ -38,6 +38,15 @@ class ViewUser {
     public function register(){
         $result = "";
 
+        return $result;
+    }
+
+    public function disconnect(){
+        unset($_SESSION["loggedUser"]);
+
+        $result = '<p>Vous vous êtes déconnecté.</p>
+            <p><a href="film">Retourner au menu principal</a></p>';
+        
         return $result;
     }
 }
