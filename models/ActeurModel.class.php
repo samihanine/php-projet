@@ -1,4 +1,5 @@
 <?php
+// DAO
 class ActeurModel
 {
     public $id,

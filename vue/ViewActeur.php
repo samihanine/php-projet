@@ -27,14 +27,8 @@ class ViewActeur {
     }
 
     public function display_update_result(){
-        $result = '<p>L\'acteur n\'a pas pu être modifié</p>';
-
-        if (isset($_POST["nom"]) && isset($_POST["prenom"])) {
-            $acteur = new ActeurModel($_POST);
-            $this->controller->update($acteur);
-
-            $result = '<p>L\'acteur à bien été modifié</p>';
-        }
+        $result = '<p>L\'acteur à bien été modifié</p>';
+       
 
         return $result;
     }

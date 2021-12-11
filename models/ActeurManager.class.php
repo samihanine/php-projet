@@ -1,6 +1,5 @@
 <?php
-
-
+// DTO
 class ActeurManager
 {
   private $_db; // Instance de PDO
