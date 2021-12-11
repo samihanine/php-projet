@@ -4,6 +4,11 @@ class ActeurController {
     protected $manager;
     protected $view;
 
+    public function __construct(ActeurManager $manager, ViewActeur $view){
+        $this->manager = $manager;
+        $this->view = $view;
+    }
+
     public function add_acteur() {
         $result = '';
 
@@ -19,10 +24,10 @@ class ActeurController {
         return $result;
     }
 
-    public function display_acteur() {
-        $list = $this->manager->getList();
+    public function display_all() {
+        $acteurs = $this->manager->getList();
 
-        $result = $this->view->display_acteur($list);
+        $result = $this->view->display_all($acteurs);
 
         return $result;
     }

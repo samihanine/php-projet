@@ -3,15 +3,18 @@ include "vue/layout.php";
 include "db_manager.php";
 
 include "vue/ViewFilm.php";
-include "controllers/FilmManager.class.php";
+include "controllers/FilmController.php";
+include "models/FilmManager.class.php";
 include "models/FilmModel.class.php";
 
 include "vue/ViewActeur.php";
-include "controllers/ActeurManager.class.php";
+include "controllers/ActeurController.php";
+include "models/ActeurManager.class.php";
 include "models/ActeurModel.class.php";
 
 include "vue/ViewUser.php";
-include "controllers/UserManager.class.php";
+include "controllers/UserController.php";
+include "models/UserManager.class.php";
 include "models/UserModel.class.php";
 
 session_start();
@@ -28,19 +31,19 @@ $acteur_manager = new ActeurManager($bdd);
 $film_manager = new FilmManager($bdd);
 $user_manager = new UserManager($bdd);
 
-$view_acteur = new ViewActeur($acteur_manager);
-$view_film = new ViewFilm($film_manager);
-$view_user = new ViewUser($user_manager);
+$view_acteur = new ViewActeur();
+$view_film = new ViewFilm();
+$view_user = new ViewUser();
+
+$acteur_controller = new ActeurController($acteur_manager, $view_acteur);
+$film_controller = new FilmController($film_manager, $view_film);
+$user_controller = new UserController($user_manager, $view_user);
 
 switch ($path) {
     // view Users
     case 'auth':
         $title = "S'identifier";
-        $content = $view_user->display_auth();
-        break;
-    case 'auth-result':
-        $title = "S'identifier";
-        $content = $view_user->display_auth_result();
+        $content = $user_controller->display_auth();
         break;
     case 'disconnect':
         $title = "Déconnexion réussie";
@@ -57,7 +60,7 @@ switch ($path) {
         break;
     case 'acteur':
         $title = "Détails des acteurs";
-        $content = $view_acteur->display_all();
+        $content = $acteur_controller->display_all();
         break;
     case 'update-acteur':
         $title = "Modifier un acteur";
@@ -98,7 +101,7 @@ switch ($path) {
     break;
     default:
         $title = "Détails des films";
-        $content = $view_film->display_all();
+        $content = $film_controller->display_all();
         break;
 }
 

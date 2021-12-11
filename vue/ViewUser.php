@@ -3,12 +3,12 @@ class ViewUser {
 
     private $controller;
 
-    public function __construct($controller) {
-        $this->controller = $controller;
+    public function __construct() {
+        
     }
 
     public function display_auth(){
-        $result = '<form method="post" action="auth-result">
+        $result = '<form method="post" action="auth">
             <label for="email">email</label>
             <input name="email" id="email" type="text" required />
 
@@ -20,16 +20,11 @@ class ViewUser {
         return $result;
     }
 
-    public function display_auth_result(){
+    public function display_auth_result($user){
         $result = '<p>Votre email ou votre mot de passe est incorrect.</p>';
-
-        if (isset($_POST["email"]) && isset($_POST["pwd"])) {
-            $user = $this->controller->auth($_POST["email"], $_POST["pwd"]);
-
-            if ($user != null) {
-                $result = '<p>Connexion réussi !</p>';
-                $_SESSION["loggedUser"] = serialize($user);
-            }
+        if ($user != null) {
+            $result = '<p>Connexion réussi !</p>';
+            $_SESSION["loggedUser"] = serialize($user);
         }
 
         return $result;

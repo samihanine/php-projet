@@ -3,8 +3,8 @@ class ViewActeur {
 
     private $controller;
 
-    public function __construct($controller) {
-        $this->controller = $controller;
+    public function __construct() {
+        
     }
 
     public function display_update(){
@@ -74,8 +74,7 @@ class ViewActeur {
         return $result;
     }
 
-    public function display_all(){
-        $list = $this->controller->getList();
+    public function display_all($acteurs){
         $result = '<table>
         <thead>
             <tr>
@@ -84,7 +83,7 @@ class ViewActeur {
         </thead>
         ';
         
-        foreach($list as $item){
+        foreach($acteurs as $item){
             $result = $result.'<tr>';
             $result = $result.'<td>'.$item->nom.'</td>'.'<td>'.$item->prenom.'</td>';
 

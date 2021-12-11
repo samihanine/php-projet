@@ -3,8 +3,8 @@ class ViewFilm {
 
     private $controller;
 
-    public function __construct($controller) {
-        $this->controller = $controller;
+    public function __construct() {
+       
     }
 
     public function display_update(){
@@ -107,8 +107,7 @@ class ViewFilm {
         return $result;
     }
 
-    public function display_all(){
-        $films = $this->controller->getList();
+    public function display_all($films){
         $result = '<table>
         <thead>
             <tr>
