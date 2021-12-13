@@ -7,24 +7,64 @@ class ViewActeur {
         
     }
 
-    public function display_update(){
-        $acteur = $this->controller->get($_GET["id"]);
+    public function display_update($films, $acteur, $user){
 
-        $result = '
-            <form method="post" action="update-acteur-result">
-            <label for="nom">nom</label>
-            <input name="nom" id="nom" type="text" value="'.$acteur->nom.'" required />
+        if($acteur){
+            $input_class = "user-input";
+            $disabled = "disabled";
+            //if($user){
+                if($user && $user->privilege() > 0){
+                    $input_class = "admin-input";
+                    $disabled = "";
+                }
+           // }
+            $result = '
+                <form method="post" action="update-acteur-result">
+                <label for="nom">nom</label>
+                <input '. $disabled .' class='. $input_class .' name="nom" id="nom" type="text" value="'.$acteur->nom().'" required />
 
-            <label for="prenom">prénom</label>
-            <input name="prenom" id="prenom" type="text" value="'.$acteur->prenom.'" required />
+                <label for="prenom">prénom</label>
+                <input '. $disabled .' class='. $input_class .' name="annee" id="annee" type="texte" value="'.$acteur->prenom().'" required />
 
-            <input name="id" type="hidden" value="'.$acteur->id.'" /> 
-            
-            <button type="submit">Modifier l\'acteur</button>
-         </form>';
+                <input '. $disabled .' class='. $input_class .' name="id" type="hidden" value="'.$acteur->id().'" />';
+                
+            if ($user && $user->privilege() > 0){
+                $result = $result . '<button type="submit">Modifier</button>';
+            }
+            $result = $result . '</form>';
+
+            if($films){
+                $result = $result . $this->display_films_acteur($films, $acteur, $user);
+            }
+
+            return $result;
+
+        }
+    }
+
+    public function display_films_acteur($films, $acteur, $user){
+        $result = '<table>
+        <thead>
+            <tr>
+                <th colspan="3">Liste des Films</th>
+            </tr>
+        </thead>';
+
+        foreach($films as $film){
+            $result = $result . "<tr>";
+            $result = $result . "<td>" . $film->nom();"</td>";
+            $result = $result . "<td>" . $film->annee();"</td>";
+            if($user && $user->privilege() > 0){
+                $result = $result . '<td><a href="remove-actor?idfilm='. $film->id() .'&idacteur='. $acteur->id() .'&redirect=acteur">Retirer</a></td>';
+            }
+            $result = $result . "</tr>";
+        }
+
+        $result = $result . "</table>";
 
         return $result;
     }
+
 
     public function display_update_result(){
         $result = '<p>L\'acteur à bien été modifié</p>';
@@ -74,20 +114,20 @@ class ViewActeur {
         return $result;
     }
 
-    public function display_all($acteurs){
+    public function display_all($acteur){
         $result = '<table>
         <thead>
             <tr>
-                <th colspan="4">Liste des acteurs</th>
+                <th colspan="4">Liste des acteur</th>
             </tr>
         </thead>
         ';
         
-        foreach($acteurs as $item){
+        foreach($acteur as $item){
             $result = $result.'<tr>';
             $result = $result.'<td>'.$item->nom.'</td>'.'<td>'.$item->prenom.'</td>';
 
-            $result = $result.'<td><a href="update-acteur?id='.$item->id.'">Modifier</a></td>';
+            $result = $result.'<td><a href="infos-acteur?id='.$item->id.'">Modifier</a></td>';
             
             $result = $result.'<td><a href="delete-acteur?id='.$item->id.'">Supprimer</a></td>';
 

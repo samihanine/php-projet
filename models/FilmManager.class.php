@@ -35,6 +35,29 @@ class FilmManager
     return new FilmModel($donnees);
   }
 
+  public function removeActor($idFilm, $idActeur){
+    $q = $this ->_db -> prepare('DELETE FROM casting WHERE idFilm = :idFilm AND idActeur = :idActeur');
+    $q->bindvalue(':idFilm', $idFilm);
+    $q->bindValue(':idActeur', $idActeur);
+    $q->execute();
+
+    return $q->fetchAll();
+  }
+
+  public function getActorsWithFilm($id){
+    $id = intval($id);
+    $acteurs = null;
+    $q = $this ->_db -> prepare('SELECT a.id, a.nom, a.prenom FROM acteur a, casting c WHERE a.id = c.idActeur AND c.idFilm = :id');
+    $q->bindvalue(':id', $id);
+    $q->execute();
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    {
+      $acteurs[] = new ActeurModel($donnees);
+    }
+
+    return $acteurs;
+  }
+
   public function getList()
   {
     $films = [];

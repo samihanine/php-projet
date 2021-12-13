@@ -50,6 +50,10 @@ switch ($path) {
         $content = $view_user->disconnect();
         break;
     // view Acteurs
+    case 'acteur':
+        $title = "Acteurs";
+        $content = $acteur_controller->display_all();
+        break;
     case 'add-acteur':
         $title = "Ajouter un acteur";
         $content = $view_acteur->display_add();
@@ -58,9 +62,9 @@ switch ($path) {
         $title = "Acteur Ajouté";
         $content = $view_acteur->display_add_result();
         break;
-    case 'acteur':
+    case 'infos-acteur':
         $title = "Détails des acteurs";
-        $content = $acteur_controller->display_all();
+        $content = $acteur_controller->display_update();
         break;
     case 'update-acteur':
         $title = "Modifier un acteur";
@@ -79,10 +83,6 @@ switch ($path) {
         $title = "Ajouter un film";
         $content = $view_film->display_add();
         break;
-    case 'add-film-result':
-        $title = "Film Ajouté";
-        $content = $view_film->display_add_result();
-        break;
     case 'infos-film':
         $title = "Infos du film";
         $content = $film_controller->display_update();
@@ -91,14 +91,14 @@ switch ($path) {
         $title = "Supprimer un film";
         $content = $view_film->display_delete();
     break;
-    case 'update-film-result':
-        $title = "Modifier un film";
-        $content = $view_film->display_update_result();
-    break;
     case 'vote-film':
         $title = "Voter pour un film";
         $content = $view_film->display_vote();
     break;
+    case 'remove-actor':
+        $title = "Acteur retiré";
+        $content = $film_controller->display_delete_actor_from_movie();
+        break;
     default:
         $title = "Détails des films";
         $content = $film_controller->display_all();
@@ -108,3 +108,18 @@ switch ($path) {
 layout($title, $content);
 
 ?>
+
+<style>
+    .user-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        border:none;
+    }
+
+    .user-input[type=number], .user-input {
+        -moz-appearance: textfield;
+        margin: 0;
+        border:none;
+        color: black
+    }
+</style>

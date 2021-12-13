@@ -34,6 +34,21 @@ class ActeurManager
     return new ActeurModel($donnees);
   }
 
+  public function getFilmsWithActor($id){
+    $id = intval($id);
+    $films = null;
+    $q = $this ->_db -> prepare('SELECT a.id, a.nom, a.annee, a.score, a.vote FROM film a, casting c WHERE a.id = c.idFilm AND c.idActeur = :id');
+    $q->bindvalue(':id', $id);
+    $q->execute();
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    {
+      $films[] = new FilmModel($donnees);
+    }
+
+    return $films;
+  }
+
+
   public function getList()
   {
     $acteurs = [];
