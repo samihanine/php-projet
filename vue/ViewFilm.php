@@ -7,29 +7,39 @@ class ViewFilm {
        
     }
 
-    public function display_update(){
-        $film = $this->controller->get($_GET["id"]);
+    public function display_update($film, $user){
+        
+        if($film){
+            $input_class = "user-input";
+            $disabled = "disabled";
+            if($user->privilege() > 0){
+                $input_class = "admin-input";
+                $disabled = "";
+            }
+            $result = '
+                <form method="post" action="update-film-result">
+                <label for="nom">nom</label>
+                <input '. $disabled .' class='. $input_class .' name="nom" id="nom" type="text" value="'.$film->nom.'" required />
 
-        $result = '
-            <form method="post" action="update-film-result">
-            <label for="nom">nom</label>
-            <input name="nom" id="nom" type="text" value="'.$film->nom.'" required />
+                <label for="annee">annee</label>
+                <input '. $disabled .' class='. $input_class .' name="annee" id="annee" type="number" value="'.$film->annee.'" required />
 
-            <label for="annee">annee</label>
-            <input name="annee" id="annee" type="number" value="'.$film->annee.'" required />
+                <label for="vote">nombre de votant</label>
+                <input '. $disabled .' class='. $input_class .' name="vote" id="vote" type="number" value="'.$film->vote.'" required />
 
-            <label for="vote">nombre de votant</label>
-            <input name="vote" id="vote" type="number" value="'.$film->vote.'" required />
+                <label for="score">score</label>
+                <input '. $disabled .' class='. $input_class .' name="score" id="score" type="number" value="'.$film->score.'" required />
 
-            <label for="score">score</label>
-            <input name="score" id="score" type="number" value="'.$film->score.'" required />
+                <input '. $disabled .' class='. $input_class .' name="id" type="hidden" value="'.$film->id.'" />';
+                
+            if ($user->privilege() > 0){
+                $result = $result . '<button type="submit">Modifier le film</button>';
+            }
+            $result = $result . '</form>';
 
-            <input name="id" type="hidden" value="'.$film->id.'" /> 
-            
-            <button type="submit">Modifier le film</button>
-         </form>';
+            return $result;
 
-        return $result;
+        }
     }
 
     public function display_update_result(){
@@ -107,7 +117,7 @@ class ViewFilm {
         return $result;
     }
 
-    public function display_all($films){
+    public function display_all($films, $user){
         $result = '<table>
         <thead>
             <tr>
@@ -118,9 +128,13 @@ class ViewFilm {
 
         foreach($films as $item){
             $result = $result.'<tr>';
-            $result = $result.'<td>'.$item->nom.'</td>'.'<td>'.$item->annee.'</td>'.'<td>'.$item->vote.'</td>'.'<td>'.$item->score.'</td>';
-            $result = $result.'<td><a href="vote-film?id='.$item->id.'">Voter</a></td>';
-            $result = $result.'<td><a href="update-film?id='.$item->id.'">Modifier</a></td>';
+            $result = $result.'<td><a href="infos-film?id='.$item->id.'">'.$item->nom.'</td>'.'<td>'.$item->annee.'</td>'.'<td>'.$item->vote.'</td>'.'<td>'.$item->score.'</td>';
+            if($user){
+                $result = $result.'<td><a href="vote-film?id='.$item->id.'">Voter</a></td>';
+                if($user->privilege() > 0){
+                    $result = $result.'<td><a href="update-film?id='.$item->id.'">Modifier</a></td>';
+                }
+            }
             
             $result = $result.'</tr>';
         }

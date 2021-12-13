@@ -11,8 +11,24 @@ class FilmController {
 
     public function display_all(){
         $films = $this->manager->getList();
-        
-        return $this->view->display_all($films);
+        $user = null;
+        if(isset($_SESSION["loggedUser"])){
+            $user = unserialize($_SESSION["loggedUser"]);
+        }
+        return $this->view->display_all($films, $user);
+    }
+
+    public function display_update(){
+        if(isset($_GET["id"])){
+            $id = intval($_GET["id"]);
+            $film = $this->manager->get($id);
+            $user = null;
+            if(isset($_SESSION["loggedUser"])){
+                $user = unserialize($_SESSION["loggedUser"]);
+            }
+            return $this->view->display_update($film, $user);
+        }
+        return "Aucun film.";
     }
 
 }

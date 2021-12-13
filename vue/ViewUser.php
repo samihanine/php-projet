@@ -24,7 +24,6 @@ class ViewUser {
         $result = '<p>Votre email ou votre mot de passe est incorrect.</p>';
         if ($user != null) {
             $result = '<p>Connexion réussi !</p>';
-            $_SESSION["loggedUser"] = serialize($user);
         }
 
         return $result;

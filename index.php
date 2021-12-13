@@ -83,9 +83,9 @@ switch ($path) {
         $title = "Film Ajouté";
         $content = $view_film->display_add_result();
         break;
-    case 'update-film':
-        $title = "Modifier un film";
-        $content = $view_film->display_update();
+    case 'infos-film':
+        $title = "Infos du film";
+        $content = $film_controller->display_update();
         break;
     case 'delete-film':
         $title = "Supprimer un film";
