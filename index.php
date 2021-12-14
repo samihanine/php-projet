@@ -66,10 +66,6 @@ switch ($path) {
         $title = "Détails des acteurs";
         $content = $acteur_controller->display_update();
         break;
-    case 'update-acteur':
-        $title = "Modifier un acteur";
-        $content = $view_acteur->display_update();
-        break;
     case 'delete-acteur':
         $title = "Supprimer un acteur";
         $content = $view_acteur->display_delete();
