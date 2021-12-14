@@ -65,6 +65,28 @@ class ViewActeur {
         return $result;
     }
 
+    public function display_add_actor($acteurs, $idfilm){
+        $result = '<form method="get" action="add-actor?">
+            <input type="text" name="idfilm" value="'.$idfilm.'" required hidden/>
+
+            <select name="newactor" id="actor-select">';
+
+            foreach($acteurs as $acteur){
+                $result = $result . '<option value="'.$acteur->id().'">'.$acteur->prenom().' '.$acteur->nom().'</option>';
+            }
+
+        $result = $result . '</select>
+            <button type="submit">Ajouter</button>
+            </form>';
+
+        return $result;
+    }
+
+    public function display_add_actor_result($idfilm){
+        $result = '<p>Nouvel acteur ajouté au film !</p>
+            <a href="infos-film?id='. $idfilm .'">Retourner à la page du film</a>';
+        return $result;
+    }
 
     public function display_update_result(){
         $result = '<p>L\'acteur à bien été modifié</p>';

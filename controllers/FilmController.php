@@ -9,6 +9,8 @@ class FilmController {
         $this->view = $view;
     }
 
+
+
     public function display_delete_actor_from_movie(){
         if(isset($_GET["idacteur"]) && isset($_GET["idfilm"])){
             $idFilm = intval($_GET["idfilm"]);
@@ -19,7 +21,7 @@ class FilmController {
                 {header("location: infos-film?id=" . $idFilm);}
             elseif($_GET["redirect"]=="acteur")
                 {header("location: infos-acteur?id=" . $idActeur);
-                    echo "zhihziz";
+
                 }
             die();
         }

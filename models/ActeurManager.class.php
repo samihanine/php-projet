@@ -48,6 +48,26 @@ class ActeurManager
     return $films;
   }
 
+  public function addActorToFilm($idfilm, $idacteur){
+    $q = $this -> _db -> prepare('INSERT INTO casting(idFilm, idActeur) VALUES(:idFilm, :idActeur)');
+    $q->bindValue(":idFilm", $idfilm);
+    $q->bindValue(":idActeur", $idacteur);
+    $q->execute();
+  }
+
+  public function getListWhereNotFilm($idfilm){
+    $acteurs = null;
+    $q = $this ->_db -> prepare('SELECT * FROM acteur WHERE id NOT IN (SELECT idActeur FROM casting WHERE idFilm = :id); ');
+    $q->bindvalue(':id', $idfilm);
+    $q->execute();
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    {
+      $acteurs[] = new ActeurModel($donnees);
+    }
+
+    return $acteurs;
+  }
+
 
   public function getList()
   {

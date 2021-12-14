@@ -43,6 +43,8 @@ class ViewFilm {
                 $result = $result . $this->display_acteurs_film($film, $acteurs, $user);
             }
 
+            $result = $result . '<a href="add-actor?idfilm='. $film->id() . '">Ajouter un acteur</a>';
+
             return $result;
 
         }
@@ -70,6 +72,8 @@ class ViewFilm {
 
         return $result;
     }
+
+   
 
     public function display_update_result(){
         $result = '<p>Le film n\'a pas pu être modifié</p>';

@@ -50,6 +50,10 @@ switch ($path) {
         $content = $view_user->disconnect();
         break;
     // view Acteurs
+    case 'add-actor':
+        $title = "Acteur ajouté";
+        $content = $acteur_controller->display_add_actor();
+        break;
     case 'acteur':
         $title = "Acteurs";
         $content = $acteur_controller->display_all();

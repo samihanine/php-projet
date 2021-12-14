@@ -1,4 +1,6 @@
 <?php
+
+
 class ActeurController {
 
     protected $manager;
@@ -23,6 +25,28 @@ class ActeurController {
 
     //     return $result;
     // }
+
+    public function display_add_actor(){
+        $user = null;
+        if(isset($_SESSION["loggedUser"])){
+            $user = unserialize($_SESSION["loggedUser"]);
+        }
+        if($user && $user->privilege() > 0 && isset($_GET["idfilm"]) && !isset($_GET["newactor"])){
+            $idFilm = intval($_GET["idfilm"]);
+            $acteurs = $this->manager->getListWhereNotFilm($idFilm);
+
+            return $this->view->display_add_actor($acteurs, $idFilm);
+
+        }elseif($user && $user->privilege() > 0 && isset($_GET["idfilm"]) && isset($_GET["newactor"])){
+
+            $this->manager->addActorToFilm(intval($_GET["idfilm"]), intval($_GET["newactor"]));
+
+            return $this->view->display_add_actor_result(intval($_GET["idfilm"]));
+        }else{
+            header("location: films");
+        }
+        return "Aucun film séléctionné.";
+    }
 
     public function display_update(){
         if(isset($_GET["id"])){
