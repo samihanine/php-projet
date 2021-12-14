@@ -17,7 +17,7 @@ function layout($title, $content) {
                         if($user){
                             if($user->privilege() == 1){
                                 echo '<li><a href="create-acteur">Ajouter un Acteur</a></li>';
-                                echo '<li><a href="add-film">Ajouter un Film</a></li>';
+                                echo '<li><a href="create-film">Ajouter un Film</a></li>';
                             }
                             echo '<li><a href="disconnect">Se déconnecter</a></li>';
                             echo "<p>Connecté avec l'email " . $user->email() . ".</p>";

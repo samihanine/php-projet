@@ -5,7 +5,8 @@ class FilmModel
         $nom,
         $annee,
         $vote,
-        $score;
+        $score,
+        $path;
 
 
     public function __construct(array $donnees)
@@ -55,6 +56,10 @@ class FilmModel
         return $this->id;
     }
 
+    public function path()
+    {
+        return $this->path;
+    }
 
     public function setId($id)
     {
@@ -69,6 +74,13 @@ class FilmModel
     {
         if (is_string($nom)) {
             $this->nom = $nom;
+        }
+    }
+
+    public function setPath($path)
+    {
+        if (is_string($path)) {
+            $this->path = $path;
         }
     }
 

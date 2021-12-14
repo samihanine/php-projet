@@ -9,8 +9,6 @@ class FilmController {
         $this->view = $view;
     }
 
-
-
     public function display_delete_actor_from_movie(){
         if(isset($_GET["idacteur"]) && isset($_GET["idfilm"])){
             $idFilm = intval($_GET["idfilm"]);
@@ -48,6 +46,38 @@ class FilmController {
             return $this->view->display_update($film, $acteurs, $user);
         }
         return "Film inexistant.";
+    }
+
+    public function display_create(){
+        $user = null;
+        if(isset($_SESSION["loggedUser"])){
+            $user = unserialize($_SESSION["loggedUser"]);
+        }
+        
+        if(!($user) && $user->privilege() != 1) {
+            return "Mauvais privilèges";
+        }
+            
+        if(!(isset($_POST["nom"]) && isset($_POST["annee"]))){ 
+            return $this->view->display_create();
+        }
+        
+        if (isset($_FILES["userfile"])) {
+            $file_name = rand().$_FILES["userfile"]['name'];
+            $dir = 'upload/'.$file_name;
+
+            move_uploaded_file($_FILES['userfile']['tmp_name'], $dir);
+
+            $_POST["path"] = $dir;
+        } else {
+            $_POST["path"] = "";
+        }
+
+        $film = new FilmModel($_POST);
+   
+        $this->manager->add($film);
+
+        return $this->view->display_create_result();
     }
 
 }

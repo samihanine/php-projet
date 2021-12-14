@@ -39,6 +39,7 @@ $acteur_controller = new ActeurController($acteur_manager, $view_acteur);
 $film_controller = new FilmController($film_manager, $view_film);
 $user_controller = new UserController($user_manager, $view_user);
 
+echo basename(__DIR__);
 switch ($path) {
     // view Users
     case 'auth':
@@ -75,9 +76,9 @@ switch ($path) {
         $content = $view_acteur->display_update_result();
     break;
     // views Film
-    case 'add-film':
+    case 'create-film':
         $title = "Ajouter un film";
-        $content = $view_film->display_add();
+        $content = $film_controller->display_create();
         break;
     case 'infos-film':
         $title = "Infos du film";

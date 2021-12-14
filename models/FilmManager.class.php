@@ -10,12 +10,13 @@ class FilmManager
 
   public function add(FilmModel $film)
   {
-    $q = $this->_db->prepare('INSERT INTO film(nom, annee, score, vote) VALUES(:nom, :annee, :score, :vote)');
+    $q = $this->_db->prepare('INSERT INTO film(nom, annee, score, vote, path) VALUES(:nom, :annee, :score, :vote, :path)');
 
     $q->bindValue(':nom', $film->nom());
     $q->bindValue(':annee', $film->annee());
     $q->bindValue(':score', $film->score());
     $q->bindValue(':vote', $film->vote());
+    $q->bindValue(':path', $film->path());
 
     $q->execute();
   }

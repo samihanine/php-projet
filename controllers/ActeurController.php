@@ -25,6 +25,7 @@ class ActeurController {
 
     //     return $result;
     // }
+    
 
     public function display_create(){
         $user = null;
@@ -35,9 +36,8 @@ class ActeurController {
 
 
             if(isset($_POST["nom"]) && isset($_POST["prenom"])){
-                $nom = $_POST["nom"];
-                $prenom = $_POST["prenom"];
-                $this->manager->add($nom, $prenom);
+                $acteur = new ActeurModel($_POST);
+                $this->manager->add($acteur);
                 return $this->view->display_create_result();
             }else{
                 return $this->view->display_create();

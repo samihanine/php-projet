@@ -8,7 +8,13 @@ class ViewFilm {
     }
 
     public function display_update($film, $acteurs, $user){
+        $img = "https://www.mezencloiremeygal.fr/wp-content/uploads/2018/10/film.png";
+        $path = $film->path();
+        if ($path != "") {
+            $img = $_SERVER['HTTP_HOST'].'/'.basename(__DIR__).'/'.$path;
+        }
         
+        echo $img;
         if($film){
             $input_class = "user-input";
             $disabled = "disabled";
@@ -20,6 +26,9 @@ class ViewFilm {
            // }
             $result = '
                 <form method="post" action="update-film-result">
+
+                <img src="'.$img.'" alt="jacket film" />
+
                 <label for="nom">nom</label>
                 <input '. $disabled .' class='. $input_class .' name="nom" id="nom" type="text" value="'.$film->nom().'" required />
 
@@ -90,9 +99,10 @@ class ViewFilm {
         return $result;
     }
 
-    public function display_add(){
+
+    public function display_create() {
         $result = '
-        <form method="post" action="update-film-result">
+        <form method="post" enctype="multipart/form-data" action="create-film">
             <label for="nom">nom</label>
             <input name="nom" id="nom" type="text" required />
 
@@ -105,11 +115,23 @@ class ViewFilm {
             <label for="score">score</label>
             <input name="score" id="score" type="number" required />
 
+            <label for="file">image</label>
+            <input type="hidden" id="file" name="MAX_FILE_SIZE" value="1048576" />
+            <input type="file" name="userfile" />
+
+
             <button type="submit">Ajouter le film</button>
-         </form>';
+        </form>';
 
         return $result;
     }
+
+    public function display_create_result() {
+        $result = "<p>Nouveau film ajouté !</p>";
+
+        return $result;
+    }
+
 
     public function display_add_result() {
         $result = '<p>Le film n\'a pas pu être ajouté</p>';
