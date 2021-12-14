@@ -95,9 +95,9 @@ class ViewActeur {
         return $result;
     }
 
-    public function display_add(){
+    public function display_create(){
         $result = '
-            <form method="post" action="add-acteur-result">
+            <form method="post" action="create-acteur">
             <label for="nom">nom</label>
             <input name="nom" id="nom" type="text" required />
 
@@ -110,15 +110,8 @@ class ViewActeur {
         return $result;
     }
 
-    public function display_add_result() {
-        $result = '<p>L\'acteur n\'a pas pu être ajouté</p>';
-
-        if (isset($_POST["nom"]) && isset($_POST["prenom"])) {
-            $acteur = new ActeurModel($_POST);
-            $this->controller->add($acteur);
-
-            $result = '<p>L\'acteur à bien été ajouté</p>';
-        }
+    public function display_create_result() {
+        $result = "<p>Nouvel acteur ajouté !</p><p>Vous pouvez dès maintenant le relier à un film</p>";
 
         return $result;
     }

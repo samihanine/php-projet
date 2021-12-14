@@ -43,7 +43,9 @@ class ViewFilm {
                 $result = $result . $this->display_acteurs_film($film, $acteurs, $user);
             }
 
-            $result = $result . '<a href="add-actor?idfilm='. $film->id() . '">Ajouter un acteur</a>';
+            if($user && $user->privilege() > 0){
+                $result = $result . '<a href="add-actor?idfilm='. $film->id() . '">Ajouter un acteur</a>';
+            }
 
             return $result;
 

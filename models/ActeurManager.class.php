@@ -9,12 +9,12 @@ class ActeurManager
     $this->_db = $db;
   }
 
-  public function add(ActeurModel $acteur)
+  public function add($prenom, $nom)
   {
     $q = $this->_db->prepare('INSERT INTO acteur(nom, prenom) VALUES(:nom, :prenom)');
 
-    $q->bindValue(':nom', $acteur->nom());
-    $q->bindValue(':prenom', $acteur->prenom());
+    $q->bindValue(':nom', $nom);
+    $q->bindValue(':prenom', $prenom);
 
     $q->execute();
   }

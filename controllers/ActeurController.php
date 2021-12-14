@@ -26,6 +26,26 @@ class ActeurController {
     //     return $result;
     // }
 
+    public function display_create(){
+        $user = null;
+        if(isset($_SESSION["loggedUser"])){
+            $user = unserialize($_SESSION["loggedUser"]);
+        }
+        if($user && $user->privilege() > 0){
+
+
+            if(isset($_POST["nom"]) && isset($_POST["prenom"])){
+                $nom = $_POST["nom"];
+                $prenom = $_POST["prenom"];
+                $this->manager->add($nom, $prenom);
+                return $this->view->display_create_result();
+            }else{
+                return $this->view->display_create();
+            }
+
+        }
+    }
+
     public function display_add_actor(){
         $user = null;
         if(isset($_SESSION["loggedUser"])){

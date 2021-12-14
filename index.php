@@ -58,13 +58,9 @@ switch ($path) {
         $title = "Acteurs";
         $content = $acteur_controller->display_all();
         break;
-    case 'add-acteur':
+    case 'create-acteur':
         $title = "Ajouter un acteur";
-        $content = $view_acteur->display_add();
-        break;
-    case 'add-acteur-result':
-        $title = "Acteur Ajouté";
-        $content = $view_acteur->display_add_result();
+        $content = $acteur_controller->display_create();
         break;
     case 'infos-acteur':
         $title = "Détails des acteurs";
