@@ -63,16 +63,26 @@ class UserManager
   public function auth($email, $pwd)
   {
 
-    $q = $this->_db->prepare('SELECT * FROM user WHERE email = :email and pwd = :pwd');
+    $q = $this->_db->prepare('SELECT * FROM user WHERE email = :email');
     $q->bindValue(':email', $email);
-    $q->bindValue(':pwd', $pwd);
     $q->execute();
 
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
-    if($donnees){
+
+    if($donnees && password_verify($pwd, $donnees["pwd"])){
       return new UserModel($donnees);
     }
     return null;
   }
+
+  public function register(UserModel $newUser){
+    $q = $this->_db->prepare("INSERT INTO user(email, pwd) VALUES(:email, :pwd)");
+    $q->bindValue(":email", $newUser->email());
+    $q->bindValue(":pwd", $newUser->pwd());
+
+    $q->execute();
+  }
 }
+
+
 ?>

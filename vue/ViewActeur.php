@@ -145,7 +145,7 @@ class ViewActeur {
             $result = $result.'<tr>';
             $result = $result.'<td>'.$item->nom.'</td>'.'<td>'.$item->prenom.'</td>';
 
-            $result = $result.'<td><a href="infos-acteur?id='.$item->id.'">Modifier</a></td>';
+            $result = $result.'<td><a href="infos-acteur?id='.$item->id.'">Infos</a></td>';
             
             $result = $result.'<td><a href="delete-acteur?id='.$item->id.'">Supprimer</a></td>';
 

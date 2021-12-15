@@ -24,7 +24,7 @@ function layout($title, $content) {
                         }
                     }else{
                         echo '<li><a href="auth">Se connecter</a></li>';
-                        
+                        echo "<li><a href='register'>S'inscrire</a></li>";                        
                     }
                     echo '</ul>
                 </nav>

@@ -45,6 +45,10 @@ switch ($path) {
         $title = "S'identifier";
         $content = $user_controller->auth();
         break;
+    case 'register':
+        $title = "S'inscire";
+        $content = $user_controller->register();
+        break;
     case 'disconnect':
         $title = "Déconnexion réussie";
         $content = $view_user->disconnect();

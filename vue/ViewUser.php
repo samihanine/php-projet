@@ -23,10 +23,38 @@ class ViewUser {
         return $result;
     }
 
-    public function register(){
-        $result = "";
+    public function display_register($errorCode){
+        $result = '
+        <form method="post" action="register">
+            <label>Email</label>
+            <input name="email" id="email" type="email" required />
+            <label>Mot de Passe :</label>
+            <input name="pwd" id="mdp" type="password" required />
+            <label>Confirmation du mot de passe :</label>
+            <input name="cmdp" id="cmdp" type="password" required />
+            <button type="submit">Créer le compte</button>
+        </form>
+        ';
+
+        if($errorCode){
+            switch($errorCode){
+                case(1):
+                    $result = $result . "<p>Le mot de passe doit faire au moins 8 caractères, contenir au moins une majuscule, une minuscule et un chiffre. Réessayez.";
+                    break;
+                case(2):
+                    $result = $result . "<p>Les mots de passes ne correspondent pas.</p>";
+                    break;
+                default:
+                    $result = $result . "<p>Erreur.</p>";
+                    break;
+            }
+        }
 
         return $result;
+    }
+
+    public function display_register_result(){
+        return "<p>Super ! Le compte a été créé.</p>";
     }
 
     public function disconnect(){

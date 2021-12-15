@@ -18,7 +18,6 @@ class ViewFilm {
             $input_class = "admin-input";
             $disabled = "";
         }
-
         $result = '
                 <form method="post" action="">
 
@@ -149,7 +148,7 @@ class ViewFilm {
             if ($user) {
                 $result = $result . '<td><a href="vote-film?id=' . $item->id . '">Voter</a></td>';
                 if ($user->privilege() > 0) {
-                    $result = $result . '<td><a href="infos-film?id=' . $item->id . '">Modifier</a></td>';
+                    $result = $result . '<td><a href="infos-film?id=' . $item->id . '">Infos</a></td>';
                     $result = $result . '<td><a href="delete-film?id=' . $item->id . '">Supprimer</a></td>';
                 }
             }
