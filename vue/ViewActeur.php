@@ -1,6 +1,14 @@
 <?php
 class ViewActeur {
 
+    /**
+     * affiche le formulaire de modification
+     * @param films<FilmModel>
+     * @param acteur
+     * @param user
+     * @return string
+     * @access private 
+     */
     public function display_update($films, $acteur, $user){
 
         if($acteur){

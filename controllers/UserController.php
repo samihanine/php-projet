@@ -9,6 +9,12 @@ class UserController {
         $this->view = $view;
     }
 
+    /**
+     * identifie un utilisateur et l'insère dans le session storage
+     * @param void
+     * @return string
+     * @access private 
+     */
     public function auth(){
         if(isset($_POST["email"]) && isset($_POST["pwd"])){
             $user = $this->manager->auth($_POST["email"], $_POST["pwd"]);

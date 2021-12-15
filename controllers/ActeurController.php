@@ -1,6 +1,4 @@
 <?php
-
-
 class ActeurController {
 
     protected $manager;
@@ -11,6 +9,12 @@ class ActeurController {
         $this->view = $view;
     }    
 
+    /**
+     * ajoute un acteur
+     * @param void
+     * @return string
+     * @access private 
+     */
     public function create(){
         $user = null;
         if(isset($_SESSION["loggedUser"])){
@@ -28,6 +32,12 @@ class ActeurController {
         }
     }
 
+    /**
+     * ajoute un acteur à un film
+     * @param void
+     * @return string
+     * @access private 
+     */
     public function add_actor(){
         $user = null;
         if(isset($_SESSION["loggedUser"])){
@@ -50,6 +60,12 @@ class ActeurController {
         return "Aucun film séléctionné.";
     }
 
+    /**
+     * modifie les informations d'un acteur
+     * @param void
+     * @return string
+     * @access private 
+     */
     public function update(){
         if(isset($_GET["id"])){
             $id = intval($_GET["id"]);
@@ -74,6 +90,12 @@ class ActeurController {
         return "Aucun film.";
     }
 
+    /**
+     * permet l'affichage de tout les acteur
+     * @param void
+     * @return string
+     * @access private 
+     */
     public function all() {
         $acteurs = $this->manager->getList();
 
@@ -82,6 +104,12 @@ class ActeurController {
         return $result;
     }
 
+    /**
+     * supprime un acteur
+     * @param void
+     * @return string
+     * @access private 
+     */
     public function delete() {
         if (isset($_GET["id"])) {
             $acteur = $this->manager->get($_GET["id"]);
