@@ -39,66 +39,61 @@ $acteur_controller = new ActeurController($acteur_manager, $view_acteur);
 $film_controller = new FilmController($film_manager, $view_film);
 $user_controller = new UserController($user_manager, $view_user);
 
-echo basename(__DIR__);
 switch ($path) {
     // view Users
     case 'auth':
         $title = "S'identifier";
-        $content = $user_controller->display_auth();
+        $content = $user_controller->auth();
         break;
     case 'disconnect':
         $title = "Déconnexion réussie";
         $content = $view_user->disconnect();
         break;
     // view Acteurs
-    case 'add-actor':
-        $title = "Acteur ajouté";
-        $content = $acteur_controller->display_add_actor();
-        break;
     case 'acteur':
         $title = "Acteurs";
-        $content = $acteur_controller->display_all();
+        $content = $acteur_controller->all();
         break;
     case 'create-acteur':
         $title = "Ajouter un acteur";
-        $content = $acteur_controller->display_create();
+        $content = $acteur_controller->create();
         break;
     case 'infos-acteur':
         $title = "Détails des acteurs";
-        $content = $acteur_controller->display_update();
+        $content = $acteur_controller->update();
         break;
     case 'delete-acteur':
         $title = "Supprimer un acteur";
-        $content = $view_acteur->display_delete();
-    break;
-    case 'update-acteur-result':
-        $title = "Modifier un acteur";
-        $content = $view_acteur->display_update_result();
+        $content = $acteur_controller->delete();
     break;
     // views Film
     case 'create-film':
         $title = "Ajouter un film";
-        $content = $film_controller->display_create();
+        $content = $film_controller->create();
         break;
     case 'infos-film':
         $title = "Infos du film";
-        $content = $film_controller->display_update();
+        $content = $film_controller->update();
         break;
     case 'delete-film':
         $title = "Supprimer un film";
-        $content = $view_film->display_delete();
+        $content = $film_controller->delete();
     break;
     case 'vote-film':
         $title = "Voter pour un film";
-        $content = $view_film->display_vote();
+        $content = $film_controller->vote();
     break;
+    case 'add-actor':
+        $title = "Acteur ajouté";
+        $content = $acteur_controller->add_actor();
+        break;
     case 'remove-actor':
         $title = "Acteur retiré";
-        $content = $film_controller->display_delete_actor_from_movie();
+        $content = $film_controller->delete_actor_from_movie();
         break;
     default:
         $title = "Détails des films";
-        $content = $film_controller->display_all();
+        $content = $film_controller->all();
         break;
 }
 

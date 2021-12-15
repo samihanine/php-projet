@@ -1,12 +1,6 @@
 <?php
 class ViewUser {
 
-    private $controller;
-
-    public function __construct() {
-        
-    }
-
     public function display_auth(){
         $result = '<form method="post" action="auth">
             <label for="email">email</label>

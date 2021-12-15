@@ -1,12 +1,6 @@
 <?php
 class ViewActeur {
 
-    private $controller;
-
-    public function __construct() {
-        
-    }
-
     public function display_update($films, $acteur, $user){
 
         if($acteur){
@@ -19,14 +13,15 @@ class ViewActeur {
                 }
            // }
             $result = '
-                <form method="post" action="update-acteur-result">
+                <form method="post" action="">
                 <label for="nom">nom</label>
                 <input '. $disabled .' class='. $input_class .' name="nom" id="nom" type="text" value="'.$acteur->nom().'" required />
 
                 <label for="prenom">prénom</label>
-                <input '. $disabled .' class='. $input_class .' name="annee" id="annee" type="texte" value="'.$acteur->prenom().'" required />
+                <input '. $disabled .' class='. $input_class .' name="prenom" id="annee" type="texte" value="'.$acteur->prenom().'" required />
 
                 <input '. $disabled .' class='. $input_class .' name="id" type="hidden" value="'.$acteur->id().'" />';
+                
                 
             if ($user && $user->privilege() > 0){
                 $result = $result . '<button type="submit">Modifier</button>';

@@ -9,7 +9,7 @@ class UserController {
         $this->view = $view;
     }
 
-    public function display_auth(){
+    public function auth(){
         if(isset($_POST["email"]) && isset($_POST["pwd"])){
             $user = $this->manager->auth($_POST["email"], $_POST["pwd"]);
             $_SESSION["loggedUser"] = serialize($user);
