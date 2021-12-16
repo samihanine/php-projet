@@ -41,7 +41,7 @@ class UserController {
             $_POST["pwd"] = password_hash($pwd, PASSWORD_BCRYPT);
             $newUser = new UserModel($_POST);
 
-            $this->manager->register($newUser);
+            $this->manager->add($newUser);
 
             return $this->view->display_register_result();
         }

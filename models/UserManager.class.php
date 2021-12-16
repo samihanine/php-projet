@@ -14,7 +14,7 @@ class UserManager
 
     $q->bindValue(':email', $user->email());
     $q->bindValue(':pwd', $user->pwd());
-    $q->bindValue(':privilege', $user->privilege());
+    $q->bindValue(':privilege', 0);
 
     $q->execute();
   }
