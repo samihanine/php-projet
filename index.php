@@ -39,6 +39,16 @@ $acteur_controller = new ActeurController($acteur_manager, $view_acteur);
 $film_controller = new FilmController($film_manager, $view_film);
 $user_controller = new UserController($user_manager, $view_user);
 
+$user = null;
+$privilege = -1;
+
+if (isset($_SESSION["loggedUser"])) {
+    $user = unserialize($_SESSION["loggedUser"]);
+    if ($user) {
+        $privilege = $user->privilege();
+    }
+}
+
 switch ($path) {
     // view Users
     case 'auth':
@@ -51,7 +61,7 @@ switch ($path) {
         break;
     case 'disconnect':
         $title = "Déconnexion réussie";
-        $content = $view_user->disconnect();
+        $content = $user_controller->disconnect();
         break;
     // view Acteurs
     case 'acteur':
@@ -59,6 +69,10 @@ switch ($path) {
         $content = $acteur_controller->all();
         break;
     case 'create-acteur':
+        if ($privilege != 1) {
+            header('location: forbidden');
+            die();
+        }
         $title = "Ajouter un acteur";
         $content = $acteur_controller->create();
         break;
@@ -67,6 +81,10 @@ switch ($path) {
         $content = $acteur_controller->update();
         break;
     case 'delete-acteur':
+        if ($privilege != 1) {
+            header('location: forbidden');
+            die();
+        }
         $title = "Supprimer un acteur";
         $content = $acteur_controller->delete();
     break;
@@ -80,20 +98,40 @@ switch ($path) {
         $content = $film_controller->update();
         break;
     case 'delete-film':
+        if ($privilege != 1) {
+            header('location: forbidden');
+            die();
+        }
         $title = "Supprimer un film";
         $content = $film_controller->delete();
     break;
     case 'vote-film':
+        if ($privilege == -1) {
+            header('location: forbidden');
+            die();
+        }
         $title = "Voter pour un film";
         $content = $film_controller->vote();
     break;
     case 'add-actor':
-        $title = "Acteur ajouté";
+        if ($privilege != 1) {
+            header('location: forbidden');
+            die();
+        }
+        $title = "Ajouter un acteur au film";
         $content = $acteur_controller->add_actor();
         break;
     case 'remove-actor':
+        if ($privilege != 1) {
+            header('location: forbidden');
+            die();
+        }
         $title = "Acteur retiré";
         $content = $film_controller->delete_actor_from_movie();
+        break;
+    case 'forbidden':
+        $title = "Accès interdit";
+        $content = $view_user->display_forbidden();
         break;
     default:
         $title = "Détails des films";
@@ -105,17 +143,3 @@ layout($title, $content);
 
 ?>
 
-<style>
-    .user-input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-        border:none;
-    }
-
-    .user-input[type=number], .user-input {
-        -moz-appearance: textfield;
-        margin: 0;
-        border:none;
-        color: black
-    }
-</style>

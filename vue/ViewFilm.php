@@ -1,6 +1,14 @@
 <?php
 class ViewFilm {
 
+    /**
+     * affiche le formulaire de modification + les informations liées à ce film
+     * @param film
+     * @param acteurs<ActeurModel>
+     * @param user
+     * @return string
+     * @access public
+     */
     public function display_update($film, $acteurs, $user)
     {
         $img = "https://www.mezencloiremeygal.fr/wp-content/uploads/2018/10/film.png";
@@ -18,26 +26,26 @@ class ViewFilm {
             $input_class = "admin-input";
             $disabled = "";
         }
-        $result = '
-                <form method="post" action="">
+        $result = '<main>
+                <form method="post" class=' . $input_class . ' action="">
 
                 <img src="' . $img . '" alt="jacket film" />
 
                 <label for="nom">nom</label>
-                <input ' . $disabled . ' class=' . $input_class . ' name="nom" id="nom" type="text" value="' . $film->nom() . '" required />
+                <input ' . $disabled . ' name="nom" id="nom" type="text" value="' . $film->nom() . '" required />
 
                 <label for="annee">annee</label>
-                <input ' . $disabled . ' class=' . $input_class . ' name="annee" id="annee" type="number" value="' . $film->annee() . '" required />
+                <input ' . $disabled . '  name="annee" id="annee" type="number" value="' . $film->annee() . '" required />
 
                 <label for="vote">nombre de votant</label>
-                <input ' . $disabled . ' class=' . $input_class . ' name="vote" id="vote" type="number" value="' . $film->vote() . '" required />
+                <input ' . $disabled . ' name="vote" id="vote" type="number" value="' . $film->vote() . '" required />
 
                 <label for="score">score</label>
-                <input ' . $disabled . ' class=' . $input_class . ' name="score" id="score" type="number" value="' . $film->score() . '" required />
+                <input ' . $disabled . ' name="score" id="score" type="number" value="' . $film->score() . '" required />
 
-                <input ' . $disabled . ' class=' . $input_class . ' name="id" type="hidden" value="' . $film->id() . '" />
+                <input ' . $disabled . ' name="id" type="hidden" value="' . $film->id() . '" />
 
-                <input '. $disabled .' class='. $input_class .' name="path" type="hidden" value="'.$film->path().'" />';
+                <input '. $disabled .' name="path" type="hidden" value="'.$film->path().'" />';
 
         if ($user && $user->privilege() > 0) {
             $result = $result . '<button type="submit">Modifier le film</button>';
@@ -49,12 +57,22 @@ class ViewFilm {
         }
 
         if ($user && $user->privilege() > 0) {
-            $result = $result . '<a href="add-actor?idfilm=' . $film->id() . '">Ajouter un acteur</a>';
+            $result = $result . '<a class="btn" href="add-actor?idfilm=' . $film->id() . '">Ajouter un acteur</a>';
         }
+        
+        $result = $result.'</main>';
 
         return $result;
     }
 
+    /**
+     * affiche la liste des acteurs jouant dans le film donné
+     * @param film
+     * @param acteurs<ActeurModel>
+     * @param user
+     * @return string
+     * @access public
+     */
     public function display_acteurs_film($film, $acteurs, $user)
     {
         $result = '<table>
@@ -81,27 +99,16 @@ class ViewFilm {
         return $result;
     }
 
-
-
-    public function display_update_result()
-    {
-        $result = '<p>Le film n\'a pas pu être modifié</p>';
-
-        if (isset($_POST["nom"]) && isset($_POST["annee"])) {
-            $film = new FilmModel($_POST);
-            $this->controller->update($film);
-
-            $result = '<p>Le film à bien été modifié</p>';
-        }
-
-        return $result;
-    }
-
-
+    /**
+     * affiche le formulaire de création d'un film
+     * @param void
+     * @return string
+     * @access public
+     */
     public function display_create()
     {
-        $result = '
-        <form method="post" enctype="multipart/form-data" action="create-film">
+        $result = '<main>
+        <form method="post" class="admin-input" enctype="multipart/form-data" action="create-film">
             <label for="nom">nom</label>
             <input name="nom" id="nom" type="text" required />
 
@@ -120,36 +127,49 @@ class ViewFilm {
 
 
             <button type="submit">Ajouter le film</button>
-        </form>';
+        </form>
+        </main>';
 
         return $result;
     }
 
+    /**
+     * affiche le résultat de la création d'un film
+     * @param void
+     * @return string
+     * @access public
+     */
     public function display_create_result()
     {
-        $result = "<p>Nouveau acteur ajouté ajouté !</p>";
+        $result = "<p>Nouveau film ajouté !</p>";
 
         return $result;
     }
 
+    /**
+     * affiche l'ensemble des films
+     * @param void
+     * @return string
+     * @access public
+     */
     public function display_all($films, $user)
     {
         $result = '<table>
         <thead>
             <tr>
-                <th colspan="4">Liste des films</th>
+                <th colspan="7">Liste des films</th>
             </tr>
         </thead>
         ';
 
         foreach ($films as $item) {
             $result = $result . '<tr>';
-            $result = $result . '<td><a href="infos-film?id=' . $item->id . '">' . $item->nom . '</td>' . '<td>' . $item->annee . '</td>' . '<td>' . $item->vote . '</td>' . '<td>' . $item->score . '</td>';
+            $result = $result . '<td class="info"><a href="infos-film?id=' . $item->id() . '">Voir plus</a></td>';
+            $result = $result . '<td><a href="infos-film?id=' . $item->id() . '">' . $item->nom() . '</td>' . '<td>' . $item->annee() . '</td>' . '<td>' . $item->vote() . '</td>' . '<td>' . $item->score() . '</td>';
             if ($user) {
-                $result = $result . '<td><a href="vote-film?id=' . $item->id . '">Voter</a></td>';
+                $result = $result . '<td class="vote"><a href="vote-film?id=' . $item->id() . '">Voter</a></td>';
                 if ($user->privilege() > 0) {
-                    $result = $result . '<td><a href="infos-film?id=' . $item->id . '">Infos</a></td>';
-                    $result = $result . '<td><a href="delete-film?id=' . $item->id . '">Supprimer</a></td>';
+                    $result = $result . '<td class="delete"><a href="delete-film?id=' . $item->id(). '">Supprimer</a></td>';
                 }
             }
 

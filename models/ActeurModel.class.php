@@ -2,7 +2,7 @@
 // DAO
 class ActeurModel
 {
-    public $id,
+    protected $id,
         $nom,
         $prenom;
 

@@ -1,5 +1,10 @@
 <?php
 function layout($title, $content) {
+    $user = null;
+
+    if(isset($_SESSION["loggedUser"])){
+        $user = unserialize($_SESSION["loggedUser"]);
+    }
 
     echo '<!DOCTYPE html>
         <html lang="fr">
@@ -12,16 +17,15 @@ function layout($title, $content) {
                     <ul>';
                     echo '<li><a href="film">Détails Films</a></li>';
                     echo '<li><a href="acteur">Détails Acteurs</a></li>';
-                    if(isset($_SESSION["loggedUser"])){
-                        $user = unserialize($_SESSION["loggedUser"]);
+
                         if($user){
                             if($user->privilege() == 1){
                                 echo '<li><a href="create-acteur">Ajouter un Acteur</a></li>';
                                 echo '<li><a href="create-film">Ajouter un Film</a></li>';
                             }
                             echo '<li><a href="disconnect">Se déconnecter</a></li>';
-                            echo "<p>Connecté avec l'email " . $user->email() . ".</p>";
-                        }
+                            //echo "<p>Connecté avec l'email " . $user->email() . ".</p>";
+                        
                     }else{
                         echo '<li><a href="auth">Se connecter</a></li>';
                         echo "<li><a href='register'>S'inscrire</a></li>";                        
@@ -31,6 +35,10 @@ function layout($title, $content) {
             </header>
 
             '.$content.'
+
+            <style>';
+               include "./assets/index.css";
+        echo '</style> 
         </body>
     </html>';
 }

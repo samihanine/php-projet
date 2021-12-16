@@ -1,7 +1,7 @@
 <?php
 class FilmModel
 {
-    public $id,
+    protected $id,
         $nom,
         $annee,
         $vote,

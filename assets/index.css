@@ -1,0 +1,196 @@
+@import url("https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600;700&display=swap");
+body {
+  background-color: #141F30;
+  margin: 0;
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body * {
+  color: white;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Gothic A1', sans-serif;
+}
+
+body *:focus {
+  outline: none !important;
+}
+
+body * li {
+  list-style: none;
+}
+
+body * a {
+  text-decoration: none;
+}
+
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+header a {
+  background-color: #3B3EC1;
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+}
+
+main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  max-width: 900px;
+  border: solid 4px #3B3EC1;
+  border-radius: 7px;
+  padding: 20px;
+}
+
+main img {
+  width: 200px;
+}
+
+main form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+main form label {
+  font-family: 900;
+  font-size: 22px;
+  color: #3B3EC1;
+}
+
+main form label::first-letter {
+  text-transform: capitalize;
+}
+
+main form input {
+  font-size: 20px;
+  padding: 10px;
+}
+
+table {
+  width: 100%;
+}
+
+table td, table th {
+  border: solid 1px grey;
+  padding: 5px;
+}
+
+table th {
+  background-color: #3B3EC1;
+}
+
+table .delete a, table .info a, table .vote a {
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+
+table .delete {
+  background-color: #af1919;
+}
+
+table .info {
+  background-color: #3b3dc18c;
+}
+
+table .vote {
+  background-color: rgba(0, 128, 0, 0.795);
+}
+
+form input {
+  -webkit-appearance: none;
+  margin: 0;
+  border: none;
+  background: #141F30 !important;
+}
+
+form input[type=number] {
+  -moz-appearance: textfield;
+  margin: 0;
+  border: none;
+  background: #141F30;
+}
+
+form input:disabled {
+  background: #141F30 !important;
+  border: none;
+}
+
+form input {
+  border-left: solid 2px white !important;
+}
+
+button, .btn {
+  background-color: #3B3EC1;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+button:hover, .btn:hover {
+  background-color: #7072f3;
+}
+
+select {
+  background-color: #141F30;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.admin-input input {
+  border: solid 1px white !important;
+}
+
+.forbidden {
+  color: #f83d3d;
+  font-size: 23px;
+  padding: 20px;
+  border: solid 1px white;
+}
+/*# sourceMappingURL=index.css.map */

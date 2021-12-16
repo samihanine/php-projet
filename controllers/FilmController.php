@@ -141,7 +141,7 @@ class FilmController
     {
         if (isset($_GET["id"])) {
             $film = $this->manager->get($_GET["id"]);
-            $film->setScore($film->score + 1);
+            $film->setScore($film->score() + 1);
             $this->manager->update($film);
         }
 

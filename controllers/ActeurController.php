@@ -99,7 +99,12 @@ class ActeurController {
     public function all() {
         $acteurs = $this->manager->getList();
 
-        $result = $this->view->display_all($acteurs);
+        $user = null;
+        if(isset($_SESSION["loggedUser"])){
+            $user = unserialize($_SESSION["loggedUser"]);
+        }
+
+        $result = $this->view->display_all($acteurs, $user);
 
         return $result;
     }

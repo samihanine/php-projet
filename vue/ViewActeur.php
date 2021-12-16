@@ -2,33 +2,33 @@
 class ViewActeur {
 
     /**
-     * affiche le formulaire de modification
+     * affiche le formulaire de modification + les informations liées à cet acteur
      * @param films<FilmModel>
      * @param acteur
      * @param user
      * @return string
-     * @access private 
+     * @access public
      */
     public function display_update($films, $acteur, $user){
 
         if($acteur){
             $input_class = "user-input";
             $disabled = "disabled";
-            //if($user){
-                if($user && $user->privilege() > 0){
-                    $input_class = "admin-input";
-                    $disabled = "";
-                }
-           // }
-            $result = '
-                <form method="post" action="">
+  
+            if($user && $user->privilege() > 0){
+                $input_class = "admin-input";
+                $disabled = "";
+            }
+
+            $result = '<main>
+                <form class='. $input_class .' method="post" action="">
                 <label for="nom">nom</label>
-                <input '. $disabled .' class='. $input_class .' name="nom" id="nom" type="text" value="'.$acteur->nom().'" required />
+                <input '. $disabled .' name="nom" id="nom" type="text" value="'.$acteur->nom().'" required />
 
                 <label for="prenom">prénom</label>
-                <input '. $disabled .' class='. $input_class .' name="prenom" id="annee" type="texte" value="'.$acteur->prenom().'" required />
+                <input '. $disabled .' name="prenom" id="annee" type="texte" value="'.$acteur->prenom().'" required />
 
-                <input '. $disabled .' class='. $input_class .' name="id" type="hidden" value="'.$acteur->id().'" />';
+                <input '. $disabled .' name="id" type="hidden" value="'.$acteur->id().'" />';
                 
                 
             if ($user && $user->privilege() > 0){
@@ -40,11 +40,20 @@ class ViewActeur {
                 $result = $result . $this->display_films_acteur($films, $acteur, $user);
             }
 
+            $result = $result.'</main>';
             return $result;
 
         }
     }
 
+    /**
+     * affiche les films auquels un acteur a participé
+     * @param films<FilmModel>
+     * @param acteur
+     * @param user
+     * @return string
+     * @access public
+     */
     public function display_films_acteur($films, $acteur, $user){
         $result = '<table>
         <thead>
@@ -68,6 +77,13 @@ class ViewActeur {
         return $result;
     }
 
+    /**
+     * affiche le formulaire pour ajouter un acteur à un film
+     * @param acteurs<ActeurModel>
+     * @param idFilm
+     * @return string
+     * @access public
+     */
     public function display_add_actor($acteurs, $idfilm){
         $result = '<form method="get" action="add-actor?">
             <input type="text" name="idfilm" value="'.$idfilm.'" required hidden/>
@@ -85,22 +101,27 @@ class ViewActeur {
         return $result;
     }
 
+    /**
+     * affiche la page de résulat suite à l'ajout d'un acteur à un film
+     * @param idfilm
+     * @return string
+     * @access public
+     */
     public function display_add_actor_result($idfilm){
         $result = '<p>Nouvel acteur ajouté au film !</p>
             <a href="infos-film?id='. $idfilm .'">Retourner à la page du film</a>';
         return $result;
     }
 
-    public function display_update_result(){
-        $result = '<p>L\'acteur à bien été modifié</p>';
-       
-
-        return $result;
-    }
-
+    /**
+     * affiche le formulaire de création d'un acteur
+     * @param void
+     * @return string
+     * @access public
+     */
     public function display_create(){
-        $result = '
-            <form method="post" action="create-acteur">
+        $result = '<main>
+            <form method="post" class="admin-input" action="create-acteur">
             <label for="nom">nom</label>
             <input name="nom" id="nom" type="text" required />
 
@@ -113,26 +134,26 @@ class ViewActeur {
         return $result;
     }
 
-    public function display_create_result() {
-        $result = "<p>Nouvel acteur ajouté !</p><p>Vous pouvez dès maintenant le relier à un film</p>";
+    /**
+     * affiche le formulaire de création d'un acteur
+     * @param void
+     * @return string
+     * @access public
+     */
+    public function display_create_result()
+    {
+        $result = "<p>Nouvel acteur ajouté !</p>";
 
         return $result;
     }
 
-    public function display_delete() {
-        $result = '<p>L\'acteur n\'a pas pu être supprimé</p>';
-
-        if (isset($_GET["id"])) {
-            $acteur = $this->controller->get($_GET["id"]);
-            $this->controller->delete($acteur);
-
-            $result = '<p>L\'acteur à bien été supprimé</p>';
-        }
-
-        return $result;
-    }
-
-    public function display_all($acteur){
+    /**
+     * affiche l'ensemble des acteurs
+     * @param acteur<ActeurModel>
+     * @return string
+     * @access public
+     */
+    public function display_all($acteur, $user){
         $result = '<table>
         <thead>
             <tr>
@@ -143,11 +164,14 @@ class ViewActeur {
         
         foreach($acteur as $item){
             $result = $result.'<tr>';
-            $result = $result.'<td>'.$item->nom.'</td>'.'<td>'.$item->prenom.'</td>';
+            $result = $result.'<td class="info"><a href="infos-acteur?id='.$item->id().'">Voir plus</a></td>';
+            $result = $result.'<td>'.$item->nom().'</td>'.'<td>'.$item->prenom().'</td>';
 
-            $result = $result.'<td><a href="infos-acteur?id='.$item->id.'">Infos</a></td>';
-            
-            $result = $result.'<td><a href="delete-acteur?id='.$item->id.'">Supprimer</a></td>';
+            if ($user) {
+                if ($user->privilege() > 0) {
+                    $result = $result.'<td class="delete"><a href="delete-acteur?id='.$item->id().'">Supprimer</a></td>';
+                }
+            }
 
             $result = $result.'</tr>';
         }

@@ -10,12 +10,11 @@ class UserController {
     }
 
     /**
-     * identifie un utilisateur et l'insère dans le session storage
+     * permet d'ajouter un utilisateur
      * @param void
      * @return string
      * @access private 
      */
-
     public function register(){
         if(isset($_POST["email"]) && isset($_POST["pwd"]) && isset($_POST["cmdp"])){
 
@@ -48,6 +47,12 @@ class UserController {
         return $this->view->display_register(null);
     }
 
+    /**
+     * identifie un utilisateur et l'insère dans le session storage
+     * @param void
+     * @return string
+     * @access private 
+     */
     public function auth(){
         if(isset($_POST["email"]) && isset($_POST["pwd"])){
             $user = $this->manager->auth($_POST["email"], $_POST["pwd"]);
@@ -58,6 +63,11 @@ class UserController {
         }
     }
 
+    public function disconnect() {
+        unset($_SESSION["loggedUser"]);
+
+        return $this->view->display_disconnect();
+    }
 }
 
 ?>
