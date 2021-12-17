@@ -85,18 +85,23 @@ class ViewActeur {
      * @access public
      */
     public function display_add_actor($acteurs, $idfilm){
-        $result = '<form method="get" action="add-actor?">
-            <input type="text" name="idfilm" value="'.$idfilm.'" required hidden/>
 
-            <select name="newactor" id="actor-select">';
+        if($acteurs){
+            $result = '<form method="get" action="add-actor?">
+                <input type="text" name="idfilm" value="'.$idfilm.'" required hidden/>
 
-            foreach($acteurs as $acteur){
-                $result = $result . '<option value="'.$acteur->id().'">'.$acteur->prenom().' '.$acteur->nom().'</option>';
+                <select name="newactor" id="actor-select">';
+
+                foreach($acteurs as $acteur){
+                    $result = $result . '<option value="'.$acteur->id().'">'.$acteur->prenom().' '.$acteur->nom().'</option>';
+                }
+
+            $result = $result . '</select>
+                <button type="submit">Ajouter</button>
+                </form>';
+            }else{
+                $result = "<p>Il n'y a pas d'acteur à ajouter.</p>";
             }
-
-        $result = $result . '</select>
-            <button type="submit">Ajouter</button>
-            </form>';
 
         return $result;
     }

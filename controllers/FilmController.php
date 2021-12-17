@@ -97,7 +97,7 @@ class FilmController
             return $this->view->display_create();
         }
 
-        if (isset($_FILES["userfile"])) {
+        if (isset($_FILES["userfile"]) && $_FILES["userfile"]["name"] !== "") {
             $file_name = rand() . $_FILES["userfile"]['name'];
             $dir = 'upload/' . $file_name; // upload/toto.txt
 

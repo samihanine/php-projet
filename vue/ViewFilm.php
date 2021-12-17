@@ -27,6 +27,7 @@ class ViewFilm {
             $disabled = "";
         }
         $result = '<main>
+                <div class="div-flex">
                 <form method="post" class=' . $input_class . ' action="">
 
                 <img src="' . $img . '" alt="jacket film" />
@@ -52,15 +53,19 @@ class ViewFilm {
         }
         $result = $result . '</form>';
 
+        $result = $result . "<div>";
+
         if ($acteurs) {
             $result = $result . $this->display_acteurs_film($film, $acteurs, $user);
         }
+
+
 
         if ($user && $user->privilege() > 0) {
             $result = $result . '<a class="btn" href="add-actor?idfilm=' . $film->id() . '">Ajouter un acteur</a>';
         }
         
-        $result = $result.'</main>';
+        $result = $result.'</div></div></main>';
 
         return $result;
     }

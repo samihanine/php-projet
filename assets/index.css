@@ -73,7 +73,7 @@ main {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
-  max-width: 900px;
+  max-width: 1300px;
   border: solid 4px #3B3EC1;
   border-radius: 7px;
   padding: 20px;
@@ -81,6 +81,25 @@ main {
 
 main img {
   width: 200px;
+}
+
+main .div-flex{
+  width: 100%;
+  display:flex;
+  flex-direction: row;
+  gap:30px;
+  justify-content: space-evenly;
+}
+
+.div-flex > div {
+  width:40%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.div-flex > div > a{
+  text-align: center;
 }
 
 main form {
