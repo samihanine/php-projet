@@ -9,13 +9,13 @@
 
 * Compte utilisateur lambda:
 
-user@admin.fr
+user@user.fr
 User1234
 
 * Compte administrateur:
 
 admin@admin.fr
-Root1234
+Admin1234
 
 ## Infos secondaire
 
