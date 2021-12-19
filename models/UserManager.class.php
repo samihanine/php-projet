@@ -10,7 +10,7 @@ class UserManager
 
   public function add(UserModel $user)
   {
-    $q = $this->_db->prepare('INSERT INTO user(email, pwd, privilege) VALUES(:email, :pwd, :privilege)');
+    $q = $this->_db->prepare('INSERT INTO users(email, pwd, privilege) VALUES(:email, :pwd, :privilege)');
 
     $q->bindValue(':email', $user->email());
     $q->bindValue(':pwd', $user->pwd());
@@ -21,14 +21,14 @@ class UserManager
 
   public function delete(UserModel $user)
   {
-    $this->_db->exec('DELETE FROM user WHERE id = '.$user->id());
+    $this->_db->exec('DELETE FROM users WHERE id = '.$user->id());
   }
 
   public function get($id)
   {
     $id = (int) $id;
 
-    $q = $this->_db->query('SELECT * FROM user WHERE id = '.$id);
+    $q = $this->_db->query('SELECT * FROM users WHERE id = '.$id);
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
     return new UserModel($donnees);
@@ -38,7 +38,7 @@ class UserManager
   {
     $users = [];
 
-    $q = $this->_db->query('SELECT * FROM user ORDER BY nom');
+    $q = $this->_db->query('SELECT * FROM users ORDER BY nom');
 
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
@@ -50,7 +50,7 @@ class UserManager
 
   public function update(UserModel $user)
   {
-    $q = $this->_db->prepare('UPDATE user SET email = :email, pwd = :pwd, privilege = :privilege WHERE id = :id');
+    $q = $this->_db->prepare('UPDATE users SET email = :email, pwd = :pwd, privilege = :privilege WHERE id = :id');
 
     $q->bindValue(':email', $user->email());
     $q->bindValue(':pwd', $user->pwd());
@@ -63,7 +63,7 @@ class UserManager
   public function auth($email, $pwd)
   {
 
-    $q = $this->_db->prepare('SELECT * FROM user WHERE email = :email');
+    $q = $this->_db->prepare('SELECT * FROM users WHERE email = :email');
     $q->bindValue(':email', $email);
     $q->execute();
 
@@ -76,7 +76,7 @@ class UserManager
   }
 
   public function register(UserModel $newUser){
-    $q = $this->_db->prepare("INSERT INTO user(email, pwd) VALUES(:email, :pwd)");
+    $q = $this->_db->prepare("INSERT INTO users(email, pwd) VALUES(:email, :pwd)");
     $q->bindValue(":email", $newUser->email());
     $q->bindValue(":pwd", $newUser->pwd());
 

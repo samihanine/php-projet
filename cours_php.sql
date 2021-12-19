@@ -154,8 +154,8 @@ INSERT INTO `film` (`id`, `nom`, `annee`, `score`, `vote`, `path`) VALUES
 (1551, 'Raw Deal', 1986, 5, 215, ''),
 (1622, 'Batman and Robin', 1997, 3.9, 1925, ''),
 (1644, 'Red Sonja', 1985, 4.6, 404, ''),
-(1645, 'Dark City', 1998, 10, 1, 'upload/131225979851zIUQDAQtL._AC_.jpg'),
-(1648, 'Requiem for a Dream', 2000, 9999, 1, 'upload/86127922369197536_af.jpg');
+(1645, 'Dark City', 1998, 10, 1, ''),
+(1648, 'Requiem for a Dream', 2000, 9999, 1, '');
 
 -- --------------------------------------------------------
 
@@ -163,7 +163,7 @@ INSERT INTO `film` (`id`, `nom`, `annee`, `score`, `vote`, `path`) VALUES
 -- Structure de la table `user`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `pwd` varchar(255) NOT NULL,
@@ -174,7 +174,7 @@ CREATE TABLE `user` (
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`id`, `email`, `pwd`, `privilege`) VALUES
+INSERT INTO `users` (`id`, `email`, `pwd`, `privilege`) VALUES
 (4, 'user@user.fr', '$2y$10$m9XejlkN8RdFfBYDwnhV/.UnWOYVorO/vubFMBTMIdYuBSBVtnpgu', 0),
 (5, 'admin@admin.fr', '$2y$10$02knmGT0Y5YynPNHOsIhPONa.eLwcnmW9aoJnfE2WGdNtgrJyRLAS', 1);
 
@@ -216,7 +216,7 @@ ALTER TABLE `film`
 --
 -- Index pour la table `user`
 --
-ALTER TABLE `user`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -248,9 +248,9 @@ ALTER TABLE `film`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1649;
 
 --
--- AUTO_INCREMENT pour la table `user`
+-- AUTO_INCREMENT pour la table `users`
 --
-ALTER TABLE `user`
+ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --

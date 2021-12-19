@@ -1,5 +1,10 @@
 # Projet PHP
 
+## Disponibilité 
+
+* Afin de facilité les testes, le site (et sa base de donnée) est hébergé à l'adresse suivante :
+https://iut-php.samihanine.fr/film
+
 ## Auteurs
 
 * Noah Blanchard (G4S3)
@@ -18,6 +23,8 @@ admin@admin.fr
 Admin1234
 
 ## Infos secondaire
+
+* Le code des views et des models sont commentés selon les normes de la PHPdoc
 
 ### Notre choix vis à vis des views
 

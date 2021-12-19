@@ -85,8 +85,10 @@ class ViewActeur {
      * @access public
      */
     public function display_add_actor($acteurs, $idfilm){
-
+        $result = '';
+        
         if($acteurs){
+            
             $result = '<form method="get" action="add-actor?">
                 <input type="text" name="idfilm" value="'.$idfilm.'" required hidden/>
 
@@ -99,8 +101,10 @@ class ViewActeur {
             $result = $result . '</select>
                 <button type="submit">Ajouter</button>
                 </form>';
+
+                $result = $result.'<p>(ne peut être ajouter que les acteurs qui ne jouent pas déjà dans le film choisis)</p>';
             }else{
-                $result = "<p>Il n'y a pas d'acteur à ajouter.</p>";
+                $result = "<p>Il n'y a pas de nouveau acteur à ajouter.</p>";
             }
 
         return $result;

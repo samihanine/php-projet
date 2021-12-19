@@ -69,6 +69,19 @@ class FilmController
         }
 
         if (isset($_POST["nom"]) && isset($_POST["annee"])) {
+
+            if (isset($_FILES["userfile"]) && $_FILES["userfile"]["name"] !== "") {
+                
+                $file_name = rand() . $_FILES["userfile"]['name'];
+                $dir = 'upload/' . $file_name;
+
+                move_uploaded_file($_FILES['userfile']['tmp_name'], $dir);
+    
+                $_POST["path"] = $dir;
+            } else {
+                $_POST["path"] = $film->path();
+            }
+
             $film = new FilmModel($_POST);
             $this->manager->update($film);
         }
@@ -99,7 +112,7 @@ class FilmController
 
         if (isset($_FILES["userfile"]) && $_FILES["userfile"]["name"] !== "") {
             $file_name = rand() . $_FILES["userfile"]['name'];
-            $dir = 'upload/' . $file_name; // upload/toto.txt
+            $dir = 'upload/' . $file_name;
 
             move_uploaded_file($_FILES['userfile']['tmp_name'], $dir);
 

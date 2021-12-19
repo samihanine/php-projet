@@ -11,7 +11,7 @@ class ViewFilm {
      */
     public function display_update($film, $acteurs, $user)
     {
-        $img = "https://www.mezencloiremeygal.fr/wp-content/uploads/2018/10/film.png";
+        $img = "https://cdn.pixabay.com/photo/2014/04/03/10/43/clapboard-311208_960_720.png";
         $path = $film->path();
         if ($path != "") {
             $img = './' . $path;
@@ -28,7 +28,7 @@ class ViewFilm {
         }
         $result = '<main>
                 <div class="div-flex">
-                <form method="post" class=' . $input_class . ' action="">
+                <form method="post" class=' . $input_class . ' enctype="multipart/form-data" action="">
 
                 <img src="' . $img . '" alt="jacket film" />
 
@@ -42,13 +42,16 @@ class ViewFilm {
                 <input ' . $disabled . ' name="vote" id="vote" type="number" value="' . $film->vote() . '" required />
 
                 <label for="score">score</label>
-                <input ' . $disabled . ' name="score" id="score" type="number" value="' . $film->score() . '" required />
+                <input ' . $disabled . ' name="score" id="score" value="' . $film->score() . '" required />
 
                 <input ' . $disabled . ' name="id" type="hidden" value="' . $film->id() . '" />
 
                 <input '. $disabled .' name="path" type="hidden" value="'.$film->path().'" />';
 
         if ($user && $user->privilege() > 0) {
+            $result = $result .'<label for="file">Modifier l\'image</label>
+            <input type="file" name="userfile" />';
+            
             $result = $result . '<button type="submit">Modifier le film</button>';
         }
         $result = $result . '</form>';
@@ -94,7 +97,7 @@ class ViewFilm {
             $result = $result . "<td>" . $acteur->nom();
             "</td>";
             if ($user && $user->privilege() > 0) {
-                $result = $result . '<td><a href="remove-actor?idfilm=' . $film->id() . '&idacteur=' . $acteur->id() . '&redirect=film">Retirer</a></td>';
+                $result = $result . '<td class="delete"><a href="remove-actor?idfilm=' . $film->id() . '&idacteur=' . $acteur->id() . '&redirect=film">Retirer</a></td>';
             }
             $result = $result . "</tr>";
         }
@@ -162,15 +165,21 @@ class ViewFilm {
         $result = '<table>
         <thead>
             <tr>
-                <th colspan="7">Liste des films</th>
+                <th colspan="8">Liste des films</th>
             </tr>
         </thead>
         ';
 
         foreach ($films as $item) {
+            $img = "https://cdn.pixabay.com/photo/2014/04/03/10/43/clapboard-311208_960_720.png";
+            $path = $item->path();
+            if ($path != "") {
+                $img = './' . $path;
+            }
+
             $result = $result . '<tr>';
             $result = $result . '<td class="info"><a href="infos-film?id=' . $item->id() . '">Voir plus</a></td>';
-            $result = $result . '<td><a href="infos-film?id=' . $item->id() . '">' . $item->nom() . '</td>' . '<td>' . $item->annee() . '</td>' . '<td>' . $item->vote() . '</td>' . '<td>' . $item->score() . '</td>';
+            $result = $result . '<td class="img-container"><img height="50" src="' . $img . '" /></td>'.'<td><a href="infos-film?id=' . $item->id() . '">' . $item->nom() . '</td>' .'<td>' . $item->annee() . '</td>' . '<td>' . $item->vote() . '</td>' . '<td>' . $item->score() . '</td>';
             if ($user) {
                 $result = $result . '<td class="vote"><a href="vote-film?id=' . $item->id() . '">Voter</a></td>';
                 if ($user->privilege() > 0) {
