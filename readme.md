@@ -5,6 +5,9 @@
 * Afin de facilité les testes, le site (et sa base de donnée) est hébergé à l'adresse suivante :
 https://iut-php.samihanine.fr/film
 
+* Un repo git est également disponnible à l'adresse suivante :
+https://github.com/samihanine/php-projet
+
 ## Auteurs
 
 * Noah Blanchard (G4S3)
@@ -12,15 +15,19 @@ https://iut-php.samihanine.fr/film
 
 ## Accès
 
-* Compte utilisateur lambda:
+* Compte utilisateur lambda :
 
 user@user.fr
 User1234
 
-* Compte administrateur:
+* Compte administrateur :
 
 admin@admin.fr
 Admin1234
+
+* fichier bdd :
+
+cours_php.sql
 
 ## Infos secondaire
 
